@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.bazinga.bazingaweather.gson.Forecast;
 import com.bazinga.bazingaweather.gson.Weather;
+import com.bazinga.bazingaweather.service.AutoUpdateService;
 import com.bazinga.bazingaweather.util.HttpUtil;
 import com.bazinga.bazingaweather.util.Utility;
 import com.bumptech.glide.Glide;
@@ -305,7 +306,8 @@ public class WeatherActivity extends AppCompatActivity {
 
         weatherLayout.setVisibility(View.VISIBLE);
 
-      //  Intent intent = new Intent(this, AutoUpdateService.class);
-      //  startService(intent);
+        Intent intent = new Intent(this, AutoUpdateService.class);
+
+        startService(intent);
     }
 }
