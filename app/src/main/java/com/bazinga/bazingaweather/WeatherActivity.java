@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -66,6 +67,8 @@ public class WeatherActivity extends AppCompatActivity {
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
 
+    private  String mWeatherId = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -77,6 +80,31 @@ public class WeatherActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
+
+        // 显示天气的处理过程
+        doWeatherlogic();
+
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                requestWeather(mWeatherId);
+
+            }
+        });
+
+        navButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+    }
+
+    private void doWeatherlogic() {
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         String weatherString = prefs.getString("weather",null);
@@ -86,6 +114,7 @@ public class WeatherActivity extends AppCompatActivity {
         if(bingPic != null){
 
             Glide.with(this).load(bingPic).into(bingPicImg);
+
         }else{
 
             loadBingPic();
@@ -95,9 +124,13 @@ public class WeatherActivity extends AppCompatActivity {
 
             Weather weather = Utility.handleWeatherResponse(weatherString);
 
+            mWeatherId = weather.basic.weatherId;
+
             showWeatherInfo(weather);
 
         }else {
+
+            mWeatherId = getIntent().getStringExtra("weather_id");
 
             String weatherId = getIntent().getStringExtra("weather_id");
 
@@ -105,6 +138,7 @@ public class WeatherActivity extends AppCompatActivity {
 
             requestWeather(weatherId);
         }
+
     }
 
     private void setInternalSystemState() {
@@ -195,7 +229,7 @@ public class WeatherActivity extends AppCompatActivity {
 
                             editor.apply();
 
-                           // weatherId = weather.basic.weatherId;
+                            mWeatherId = weather.basic.weatherId;
 
                             showWeatherInfo(weather);
 
