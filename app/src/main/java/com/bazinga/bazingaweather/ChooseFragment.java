@@ -118,15 +118,13 @@ public class ChooseFragment extends Fragment {
 
                     if (getActivity() instanceof MainActivity) {
 
-                        // Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                          Intent intent = new Intent(getActivity(), WeatherActivity.class);
 
-                        //  intent.putExtra("weather_id", weatherId);
+                          intent.putExtra("weather_id", weatherId);
 
-                        //  startActivity(intent);
+                          startActivity(intent);
 
-                        //  getActivity().finish();
-                        Intent intent = new Intent();
-
+                          getActivity().finish();
                     }
                 }
             }
