@@ -202,7 +202,7 @@ public class ChooseFragment extends Fragment {
 
         backButton.setVisibility(View.VISIBLE);
 
-        cityList = DataSupport.where("provinceid = ?", String.valueOf(selectedProvince.getId())).find(City.class);
+        cityList = DataSupport.where("provinceid = ?", String.valueOf(selectedProvince.getProvinceCode())).find(City.class);
 
         if (cityList.size() > 0) {
 
@@ -239,7 +239,7 @@ public class ChooseFragment extends Fragment {
 
         backButton.setVisibility(View.VISIBLE);
 
-        countyList = DataSupport.where("cityid = ?", String.valueOf(selectedCity.getId())).find(County.class);
+        countyList = DataSupport.where("cityid = ?", String.valueOf(selectedCity.getCityCode())).find(County.class);
 
         if (countyList.size() > 0) {
 
@@ -263,6 +263,8 @@ public class ChooseFragment extends Fragment {
             int cityCode = selectedCity.getCityCode();
 
             String address = "http://guolin.tech/api/china/" + provinceCode + "/" + cityCode;
+
+            if(cityCode != 1000)
 
             queryFromServer(address, "county");
         }
@@ -302,11 +304,11 @@ public class ChooseFragment extends Fragment {
 
                 } else if ("city".equals(type)) {
 
-                    result = Utility.handleCityResponse(responseText, selectedProvince.getId());
+                    result = Utility.handleCityResponse(responseText, selectedProvince.getProvinceCode());
 
                 } else if ("county".equals(type)) {
 
-                    result = Utility.handleCountyResponse(responseText, selectedCity.getId());
+                    result = Utility.handleCountyResponse(responseText, selectedCity.getCityCode());
 
                 }
 
