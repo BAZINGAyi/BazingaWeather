@@ -10,8 +10,10 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 
 import com.bazinga.bazingaweather.gson.Weather;
+import com.bazinga.bazingaweather.util.Constant;
 import com.bazinga.bazingaweather.util.HttpUtil;
-import com.bazinga.bazingaweather.util.Utility;
+import com.bazinga.bazingaweather.util.JSONUtility;
+
 
 import java.io.IOException;
 
@@ -62,12 +64,12 @@ public class AutoUpdateService extends Service {
         if (weatherString != null) {
             // 有缓存时直接解析天气数据
 
-            Weather weather = Utility.handleWeatherResponse(weatherString);
+            Weather weather = JSONUtility.handleWeatherResponse(weatherString);
 
             String weatherId = weather.basic.weatherId;
 
-            String weatherUrl = "http://guolin.tech/api/weather?cityid=" +
-                    weatherId + "&key=bc0418b57b2d4918819d3974ac1285d9";
+            String weatherUrl = Constant.WEATHER_URL +
+                    weatherId + Constant.KEY;
 
             HttpUtil.sendOkhttpRequest(weatherUrl, new Callback() {
                 @Override
@@ -75,7 +77,7 @@ public class AutoUpdateService extends Service {
 
                     String responseText = response.body().string();
 
-                    Weather weather = Utility.handleWeatherResponse(responseText);
+                    Weather weather = JSONUtility.handleWeatherResponse(responseText);
 
                     if (weather != null && "ok".equals(weather.status)) {
 

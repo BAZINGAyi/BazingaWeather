@@ -16,7 +16,7 @@ import org.json.JSONObject;
  * Created by bazinga on 2017/4/1.
  */
 
-public class Utility {
+public class JSONUtility {
 
     /** 解析省级数据
      *

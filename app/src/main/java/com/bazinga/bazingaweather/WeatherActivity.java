@@ -24,7 +24,7 @@ import com.bazinga.bazingaweather.gson.Forecast;
 import com.bazinga.bazingaweather.gson.Weather;
 import com.bazinga.bazingaweather.service.AutoUpdateService;
 import com.bazinga.bazingaweather.util.HttpUtil;
-import com.bazinga.bazingaweather.util.Utility;
+import com.bazinga.bazingaweather.util.JSONUtility;
 import com.bumptech.glide.Glide;
 
 import java.io.IOException;
@@ -123,7 +123,7 @@ public class WeatherActivity extends AppCompatActivity {
 
         if(weatherString !=null){
 
-            Weather weather = Utility.handleWeatherResponse(weatherString);
+            Weather weather = JSONUtility.handleWeatherResponse(weatherString);
 
             mWeatherId = weather.basic.weatherId;
 
@@ -215,7 +215,7 @@ public class WeatherActivity extends AppCompatActivity {
 
                 final String responseText = response.body().string();
 
-                final Weather weather = Utility.handleWeatherResponse(responseText);
+                final Weather weather = JSONUtility.handleWeatherResponse(responseText);
 
                 runOnUiThread(new Runnable() {
                     @Override
