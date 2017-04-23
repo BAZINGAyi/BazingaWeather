@@ -8,6 +8,30 @@ import com.google.gson.annotations.SerializedName;
 
 public class Suggestion {
 
+    public Comfort getComfort() {
+        return comfort;
+    }
+
+    public void setComfort(Comfort comfort) {
+        this.comfort = comfort;
+    }
+
+    public CarWash getCarWash() {
+        return carWash;
+    }
+
+    public void setCarWash(CarWash carWash) {
+        this.carWash = carWash;
+    }
+
+    public Sport getSport() {
+        return sport;
+    }
+
+    public void setSport(Sport sport) {
+        this.sport = sport;
+    }
+
     @SerializedName("comf")
     public Comfort comfort;
 
@@ -16,26 +40,54 @@ public class Suggestion {
 
     public Sport sport;
 
-    public class Comfot{
+    public static class Comfot{
+        public String getInfo() {
+            return info;
+        }
+
+        public void setInfo(String info) {
+            this.info = info;
+        }
 
         @SerializedName("txt")
         public String info;
 
     }
 
-    public class CarWash{
+    public static class CarWash{
+        public String getInfo() {
+            return info;
+        }
+
+        public void setInfo(String info) {
+            this.info = info;
+        }
 
         @SerializedName("txt")
         public String info;
     }
 
-    public class Sport{
+    public static class Sport{
+        public String getInfo() {
+            return info;
+        }
+
+        public void setInfo(String info) {
+            this.info = info;
+        }
 
         @SerializedName("txt")
         public String info;
     }
 
-    public class Comfort{
+    public static class Comfort{
+        public String getInfo() {
+            return info;
+        }
+
+        public void setInfo(String info) {
+            this.info = info;
+        }
 
         @SerializedName("txt")
         public String info;

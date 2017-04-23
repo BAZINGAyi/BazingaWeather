@@ -159,9 +159,10 @@ public class WeatherActivity extends MVPBaseActivity<IShowWeatherVIew,HandleWeat
     @Override
     public void showWeatherData(Weather weather) {
         if(weather !=null){
+
             String cityName = weather.basic.cityName;
 
-            String updateTime = weather.basic.update.updateTime.split(" ")[1];
+            String updateTime = weather.basic.update.updateTime;
 
             String degree = weather.now.temperature + "℃";
 
@@ -169,7 +170,7 @@ public class WeatherActivity extends MVPBaseActivity<IShowWeatherVIew,HandleWeat
 
             titleCity.setText(cityName);
 
-            titleUpdateTime.setText(updateTime);
+            titleUpdateTime.setText(updateTime.split(" ")[1]);
 
             degreeText.setText(degree);
 
@@ -214,7 +215,7 @@ public class WeatherActivity extends MVPBaseActivity<IShowWeatherVIew,HandleWeat
                 aqiText.setText(weather.aqi.city.aqi);
                 pm25Text.setText(weather.aqi.city.pm25);
             }
-            
+
             String comfort = getString(R.string.flag_comfortable)+ weather.suggestion.comfort.info;
 
             String carWash = getString(R.string.flag_cleanCar) + weather.suggestion.carWash.info;

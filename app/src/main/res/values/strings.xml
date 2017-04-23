@@ -12,5 +12,14 @@
     <string name="flag_cleanCar">洗车指数：</string>
     <string name="flag_sport">运行建议：</string>
     <string name="no_value">无</string>
+    <string name="data_cityName">cityname</string>
+    <string name="data_updateTime">updateTIme</string>
+    <string name="data_temperature">tempureature</string>
+    <string name="data_weatherInfo">weatherInfo</string>
+    <string name="data_aqi">aqi</string>
+    <string name="data_pm25">pm25</string>
+    <string name="data_comfortable">comfortable</string>
+    <string name="data_carWash">carWash</string>
+    <string name="data_sport">sport</string>
 
 </resources>

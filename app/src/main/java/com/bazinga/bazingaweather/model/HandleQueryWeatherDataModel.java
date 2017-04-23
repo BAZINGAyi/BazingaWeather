@@ -1,6 +1,7 @@
 package com.bazinga.bazingaweather.model;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -114,17 +115,20 @@ public class HandleQueryWeatherDataModel implements IHandleQueryWeatherDataModel
 
     private void queryWeather(final HandleQueryDataLoadListener handleQueryDataLoadListener) {
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+       // SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
 
-        final String weatherString = prefs.getString(activity.getString(R.string.weatherData),null);
+       // final String weatherString = prefs.getString(activity.getString(R.string.weatherData),null);
 
-        if (weatherString != null && isSyncWeather == false && weatherId == null){
+        final Weather weather = WeatherTask.getWeaherDbAndSharef(activity);
+
+        if (weather.forecastList.size() != 0 && isSyncWeather == false && weatherId == null){
 
             new Thread(new Runnable() {
                 @Override
                 public void run() {
 
-                    Weather weather = JSONUtility.handleWeatherResponse(weatherString);
+                   // Weather weather = JSONUtility.handleWeatherResponse(weatherString);
+
 
                     handleQueryDataLoadListener.onCompleted(weather);
 
@@ -151,7 +155,9 @@ public class HandleQueryWeatherDataModel implements IHandleQueryWeatherDataModel
 
                     if (weather != null && "ok".equals(weather.status)) {
 
-                        WeatherTask.saveWeather(weather,activity,responseText);
+                        WeatherTask.saveWeatherForeastDbandSharef(weather,activity);
+
+                        //WeatherTask.saveWeather(weather,activity,responseText);
 
                         WeatherTask.saveWeatherId(activity,weatherId);
 
