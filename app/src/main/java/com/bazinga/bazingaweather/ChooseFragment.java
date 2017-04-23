@@ -56,7 +56,6 @@ public class ChooseFragment extends MVpBaseFragment<IShowChooseVIew,HandleQueryD
 
     public static final int LEVEL_COUNTY = 2;
 
-
     private ProgressDialog progressDialog;
 
     // 用于显示查询到的省市县的信息
@@ -68,7 +67,6 @@ public class ChooseFragment extends MVpBaseFragment<IShowChooseVIew,HandleQueryD
     private List<City> cityList;
 
     private List<County> countyList;
-
 
     private Province selectedProvince;
 
@@ -126,7 +124,7 @@ public class ChooseFragment extends MVpBaseFragment<IShowChooseVIew,HandleQueryD
 
                           Intent intent = new Intent(getActivity(), WeatherActivity.class);
 
-                          intent.putExtra("weather_id", weatherId);
+                          intent.putExtra(getString(R.string.weatherId), weatherId);
 
                           startActivity(intent);
 
@@ -136,11 +134,7 @@ public class ChooseFragment extends MVpBaseFragment<IShowChooseVIew,HandleQueryD
 
                         WeatherActivity activity = (WeatherActivity) getActivity();
 
-                        activity.drawerLayout.closeDrawers();
-
-                        activity.swipeRefresh.setRefreshing(true);
-
-                        activity.requestWeather(weatherId);
+                        activity.frgmentQureyWeather(weatherId);
                     }
                 }
             }

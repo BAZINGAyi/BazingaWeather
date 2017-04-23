@@ -10,4 +10,5 @@ public class Constant {
     public static String PROVINCE_URL = "http://guolin.tech/api/china";
     public static String CITY_URL = "http://guolin.tech/api/china/";
     public static String COUNTY_URL  = "http://guolin.tech/api/china/";
+    public static String PIC_URL = "http://guolin.tech/api/bing_pic";
 }

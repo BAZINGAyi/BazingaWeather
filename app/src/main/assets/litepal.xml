@@ -13,7 +13,8 @@
 
         <mapping class = "com.bazinga.bazingaweather.db.County"/>
 
-    </list>>
+
+    </list>
 
 
 </litepal>

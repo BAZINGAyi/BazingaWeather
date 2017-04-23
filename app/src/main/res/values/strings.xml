@@ -3,5 +3,14 @@
     <string name="nework_error">网络连接有问题</string>
     <string name="state">中国</string>
     <string name="loadText">正在加载...</string>
+    <string name="weatherId">weather_id</string>
+    <string name="weatherData">weather</string>
+    <string name="picData">bing_pic</string>
+    <string name="background_error">获取背景信息失败</string>
+    <string name="weather_error">获取天气信息失败</string>
+    <string name="flag_comfortable">舒适度：</string>
+    <string name="flag_cleanCar">洗车指数：</string>
+    <string name="flag_sport">运行建议：</string>
+    <string name="no_value">无</string>
 
 </resources>
