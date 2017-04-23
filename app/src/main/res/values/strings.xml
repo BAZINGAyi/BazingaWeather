@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BgWeather</string>
+    <string name="app_name">Sunny Day</string>
     <string name="nework_error">网络连接有问题</string>
     <string name="state">中国</string>
     <string name="loadText">正在加载...</string>

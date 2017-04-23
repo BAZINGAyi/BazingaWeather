@@ -207,22 +207,14 @@ public class WeatherActivity extends MVPBaseActivity<IShowWeatherVIew,HandleWeat
                 forecastLayout.addView(view);
             }
 
-
-
-                if(weather.aqi.city.aqi == null)
-                    aqiText.setText(getString(R.string.no_value));
-                else
-                    aqiText.setText(weather.aqi.city.aqi);
-
-                if(weather.aqi.city.pm25 == null)
-                    pm25Text.setText(getString(R.string.no_value));
-                else
-                    pm25Text.setText(weather.aqi.city.pm25);
-
-
-
-
-
+            if(weather.aqi == null){
+                aqiText.setText(getString(R.string.no_value));
+                pm25Text.setText(getString(R.string.no_value));
+            }else{
+                aqiText.setText(weather.aqi.city.aqi);
+                pm25Text.setText(weather.aqi.city.pm25);
+            }
+            
             String comfort = getString(R.string.flag_comfortable)+ weather.suggestion.comfort.info;
 
             String carWash = getString(R.string.flag_cleanCar) + weather.suggestion.carWash.info;
