@@ -35,6 +35,8 @@ import com.bazinga.bazingaweather.view.IShowWeatherVIew;
 import com.bumptech.glide.Glide;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -156,17 +158,97 @@ public class WeatherActivity extends MVPBaseActivity<IShowWeatherVIew,HandleWeat
     }
 
 
+//    @Override
+//    public void showWeatherData(Weather weather) {
+//        if(weather !=null){
+//
+//            String cityName = weather.basic.cityName;
+//
+//            String updateTime = weather.basic.update.updateTime;
+//
+//            String degree = weather.now.temperature + "℃";
+//
+//            String weatherInfo = weather.now.more.info;
+//
+//            titleCity.setText(cityName);
+//
+//            titleUpdateTime.setText(updateTime.split(" ")[1]);
+//
+//            degreeText.setText(degree);
+//
+//            weatherInfoText.setText(weatherInfo);
+//
+//            forecastLayout.removeAllViews();
+//
+//            int itemLayout = 0;
+//
+//            for (Forecast forecast : weather.forecastList) {
+//
+//                View view;
+//
+//                if(itemLayout != 0){
+//                    view = LayoutInflater.from(this).inflate(R.layout.forecast_item,
+//                            forecastLayout, false);
+//                }else{
+//                    itemLayout++;
+//                    view = LayoutInflater.from(this).inflate(R.layout.forecast_today_item,
+//                            forecastLayout, false);
+//                }
+//
+//                TextView dateText = (TextView) view.findViewById(R.id.date);
+//                TextView infoText = (TextView) view.findViewById(R.id.weather_description);
+//                TextView maxText = (TextView) view.findViewById(R.id.high_temperature);
+//                TextView minText = (TextView) view.findViewById(R.id.low_temperature);
+//                ImageView img = (ImageView) view.findViewById(R.id.weather_icon);
+//
+//                dateText.setText(forecast.date);
+//                infoText.setText(forecast.more.info);
+//                maxText.setText(forecast.temperature.max);
+//                minText.setText(forecast.temperature.min);
+//                img.setImageResource(ResourceHelper.getResourceId(forecast.more.code));
+//
+//                forecastLayout.addView(view);
+//            }
+//
+//            if(weather.aqi == null){
+//                aqiText.setText(getString(R.string.no_value));
+//                pm25Text.setText(getString(R.string.no_value));
+//            }else{
+//                aqiText.setText(weather.aqi.city.aqi);
+//                pm25Text.setText(weather.aqi.city.pm25);
+//            }
+//
+//            String comfort = getString(R.string.flag_comfortable)+ weather.suggestion.comfort.info;
+//
+//            String carWash = getString(R.string.flag_cleanCar) + weather.suggestion.carWash.info;
+//
+//            String sport = getString(R.string.flag_sport)+ weather.suggestion.sport.info;
+//
+//            comfortText.setText(comfort);
+//
+//            carWashText.setText(carWash);
+//
+//            sportText.setText(sport);
+//
+//            weatherLayout.setVisibility(View.VISIBLE);
+//
+//            Intent intent = new Intent(this, AutoUpdateService.class);
+//
+//            startService(intent);
+//        }
+//    }
+
     @Override
-    public void showWeatherData(Weather weather) {
+    public void showWeatherData(Map<String,Object> weather) {
         if(weather !=null){
 
-            String cityName = weather.basic.cityName;
+            String cityName =(String)weather.get(getString(R.string.data_cityName));
 
-            String updateTime = weather.basic.update.updateTime;
+            String updateTime = (String)weather.get(getString(R.string.data_updateTime));
 
-            String degree = weather.now.temperature + "℃";
+            String degree = (String)weather.get(getString(R.string.data_temperature)) + "℃";
 
-            String weatherInfo = weather.now.more.info;
+            String weatherInfo = (String)weather.get(getString(R.string.data_weatherInfo));
 
             titleCity.setText(cityName);
 
@@ -180,7 +262,7 @@ public class WeatherActivity extends MVPBaseActivity<IShowWeatherVIew,HandleWeat
 
             int itemLayout = 0;
 
-            for (Forecast forecast : weather.forecastList) {
+            for (Forecast forecast : (List<Forecast>)weather.get(getString(R.string.data_ForeastInfo))) {
 
                 View view;
 
@@ -208,19 +290,19 @@ public class WeatherActivity extends MVPBaseActivity<IShowWeatherVIew,HandleWeat
                 forecastLayout.addView(view);
             }
 
-            if(weather.aqi == null){
+            if(weather.get(getString(R.string.data_aqi)) == null){
                 aqiText.setText(getString(R.string.no_value));
                 pm25Text.setText(getString(R.string.no_value));
             }else{
-                aqiText.setText(weather.aqi.city.aqi);
-                pm25Text.setText(weather.aqi.city.pm25);
+                aqiText.setText((String)weather.get(getString(R.string.data_aqi)));
+                pm25Text.setText((String)weather.get(getString(R.string.data_pm25)));
             }
 
-            String comfort = getString(R.string.flag_comfortable)+ weather.suggestion.comfort.info;
+            String comfort = getString(R.string.flag_comfortable)+ weather.get(getString(R.string.data_comfortable));
 
-            String carWash = getString(R.string.flag_cleanCar) + weather.suggestion.carWash.info;
+            String carWash = getString(R.string.flag_cleanCar) + weather.get(getString(R.string.data_carWash));
 
-            String sport = getString(R.string.flag_sport)+ weather.suggestion.sport.info;
+            String sport = getString(R.string.flag_sport)+  weather.get(getString(R.string.data_sport));
 
             comfortText.setText(comfort);
 

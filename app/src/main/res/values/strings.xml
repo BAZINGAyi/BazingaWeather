@@ -21,5 +21,20 @@
     <string name="data_comfortable">comfortable</string>
     <string name="data_carWash">carWash</string>
     <string name="data_sport">sport</string>
+    <string name="data_ForeastInfo">info</string>
+
+
+
+    <!-- 定时服务相关 -->
+    <string name="pref_time_one" translatable="false">关</string>
+    <string name="pref_time_two" translatable="false">4</string>
+    <string name="pref_time_three" translatable="false">6</string>
+    <string name="pref_time_four" translatable="false">8</string>
+    <string name="pref_time_five" translatable="false">12</string>
+    <string name="pref_serviceUpdateTime_defalut" translatable="false">8</string>
+    <string name="pref_serviceUpdateTime_title" translatable="false">自动更新时间</string>
+    <string name="pref_serviceUpdateTime_key" translatable="false">℃</string>
+    <string name="data_Date">date</string>
+
 
 </resources>

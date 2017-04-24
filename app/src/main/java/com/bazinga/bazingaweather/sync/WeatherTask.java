@@ -15,7 +15,9 @@ import com.bazinga.bazingaweather.gson.Suggestion;
 import com.bazinga.bazingaweather.gson.Weather;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.litepal.crud.DataSupport.findAll;
 
@@ -95,6 +97,69 @@ public class WeatherTask {
         editor.apply();
     }
 
+
+    public static Map<String,Object> getDataTest(Context context){
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        Map<String,Object> weatherInfo = new HashMap<>();
+
+        weatherInfo.put(context.getString(R.string.data_cityName),
+                prefs.getString(context.getString(R.string.data_cityName),null));
+        weatherInfo.put(context.getString(R.string.data_updateTime),
+                prefs.getString(context.getString(R.string.data_updateTime),null));
+        weatherInfo.put(context.getString(R.string.data_temperature),
+                prefs.getString(context.getString(R.string.data_temperature),null));
+        weatherInfo.put(context.getString(R.string.data_weatherInfo),
+                prefs.getString(context.getString(R.string.data_weatherInfo),null));
+
+        String api = prefs.getString(context.getString(R.string.data_aqi),null);
+        String pm25 = prefs.getString(context.getString(R.string.data_pm25),null);
+
+        if(api != null && pm25 != null){
+            weatherInfo.put(context.getString(R.string.data_aqi),
+                    prefs.getString(context.getString(R.string.data_aqi),null));
+            weatherInfo.put(context.getString(R.string.data_pm25),
+                    prefs.getString(context.getString(R.string.data_pm25),null));
+        }
+
+        weatherInfo.put(context.getString(R.string.data_comfortable),
+                prefs.getString(context.getString(R.string.data_comfortable),null));
+        weatherInfo.put(context.getString(R.string.data_carWash),
+                prefs.getString(context.getString(R.string.data_carWash),null));
+        weatherInfo.put(context.getString(R.string.data_sport)
+                ,prefs.getString(context.getString(R.string.data_sport),null));
+
+        List<WeatherDb> lists = WeatherDb.findAll(WeatherDb.class);
+
+        List<Forecast> forecasrList= new ArrayList<>();
+
+        for (WeatherDb forecast : lists) {
+
+            Forecast f = new Forecast();
+            f.setDate(forecast.getDate());
+
+            Forecast.Temperature t = new Forecast.Temperature();
+            t.setMax(forecast.getMax());
+            t.setMin(forecast.getMin());
+
+            Forecast.More m = new Forecast.More();
+            m.setInfo(forecast.getInfo());
+            m.setCode(forecast.getCode());
+
+            f.setTemperature(t);
+
+            f.setMore(m);
+
+            forecasrList.add(f);
+
+        }
+
+        weatherInfo.put(context.getString(R.string.data_ForeastInfo),forecasrList);
+
+        return weatherInfo;
+    }
+// 优化以下代码
     public static Weather getWeaherDbAndSharef(Context context) {
 
         Weather weather = new Weather();

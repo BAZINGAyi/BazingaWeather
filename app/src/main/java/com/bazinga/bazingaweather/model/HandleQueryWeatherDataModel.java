@@ -20,6 +20,8 @@ import org.litepal.crud.DataSupport;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -119,9 +121,11 @@ public class HandleQueryWeatherDataModel implements IHandleQueryWeatherDataModel
 
        // final String weatherString = prefs.getString(activity.getString(R.string.weatherData),null);
 
-        final Weather weather = WeatherTask.getWeaherDbAndSharef(activity);
+      //  final Weather weather = WeatherTask.getWeaherDbAndSharef(activity);
 
-        if (weather.forecastList.size() != 0 && isSyncWeather == false && weatherId == null){
+       final Map<String ,Object> weather = WeatherTask.getDataTest(activity);
+
+        if (weather.size() != 0 && isSyncWeather == false && weatherId == null){
 
             new Thread(new Runnable() {
                 @Override
@@ -161,10 +165,12 @@ public class HandleQueryWeatherDataModel implements IHandleQueryWeatherDataModel
 
                         WeatherTask.saveWeatherId(activity,weatherId);
 
+                        final Map<String ,Object> weatherinfo = WeatherTask.getDataTest(activity);
+
                         activity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                handleQueryDataLoadListener.onCompleted(weather);
+                                handleQueryDataLoadListener.onCompleted(weatherinfo);
                             }
                         });
 

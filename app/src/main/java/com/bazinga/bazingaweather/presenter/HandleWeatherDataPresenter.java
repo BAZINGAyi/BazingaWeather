@@ -19,6 +19,7 @@ import com.bazinga.bazingaweather.view.IShowChooseVIew;
 import com.bazinga.bazingaweather.view.IShowWeatherVIew;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by bazinga on 2017/4/23.
@@ -54,7 +55,7 @@ public class HandleWeatherDataPresenter extends BasePresenter<IShowWeatherVIew> 
             handleQueryWeatherDataModel.loadProgress(new IHandleQueryWeatherDataModel.
                     HandleQueryDataLoadListener(){
                 @Override
-                public void onCompleted(Weather weather) {
+                public void onCompleted(Map<String,Object> weather) {
                     if((weather)!=null){
                         iShowWeatherVIew.showWeatherData(weather);
                         iShowWeatherVIew.closeloadProgress();

@@ -6,6 +6,7 @@ import com.bazinga.bazingaweather.db.Province;
 import com.bazinga.bazingaweather.gson.Weather;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by bazinga on 2017/4/17.
@@ -13,7 +14,9 @@ import java.util.List;
 
 public interface IShowWeatherVIew {
 
-    void showWeatherData(Weather weather);
+ //   void showWeatherData(Weather weather);
+
+    void showWeatherData(Map<String,Object> weather);
 
     void showWeatherError(String msg);
 
