@@ -169,7 +169,6 @@ public class WeatherActivity extends MVPBaseActivity<IShowWeatherVIew,HandleWeat
     }
 
 
-
     @Override
     public void showWeatherData(Map<String,Object> weather) {
         if(weather !=null){

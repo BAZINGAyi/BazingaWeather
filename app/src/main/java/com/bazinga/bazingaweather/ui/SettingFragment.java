@@ -6,6 +6,7 @@ import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.PreferenceScreen;
 
 import com.bazinga.bazingaweather.R;
 import com.bazinga.bazingaweather.sync.WeatherJobService;
@@ -20,7 +21,26 @@ public class SettingFragment extends PreferenceFragmentCompat implements
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+
         addPreferencesFromResource(R.xml.pref_general);
+
+        SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
+
+        PreferenceScreen prefScreen = getPreferenceScreen();
+
+        int count = prefScreen.getPreferenceCount();
+
+        for (int i = 0; i < count; i++) {
+
+            Preference p = prefScreen.getPreference(i);
+
+            if (!(p instanceof CheckBoxPreference)) {
+
+                String value = sharedPreferences.getString(p.getKey(), "");
+
+                setPreferenceSummary(p, value);
+            }
+        }
     }
 
     @Override
