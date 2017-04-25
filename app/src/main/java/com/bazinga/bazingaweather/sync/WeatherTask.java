@@ -159,6 +159,9 @@ public class WeatherTask {
 
         return weatherInfo;
     }
+
+
+
 // 优化以下代码
     public static Weather getWeaherDbAndSharef(Context context) {
 

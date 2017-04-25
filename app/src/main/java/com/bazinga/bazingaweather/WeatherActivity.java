@@ -12,6 +12,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -27,9 +28,8 @@ import com.bazinga.bazingaweather.base.MVPBaseActivity;
 import com.bazinga.bazingaweather.gson.Forecast;
 import com.bazinga.bazingaweather.gson.Weather;
 import com.bazinga.bazingaweather.presenter.HandleWeatherDataPresenter;
-import com.bazinga.bazingaweather.service.AutoUpdateService;
-import com.bazinga.bazingaweather.util.HttpUtil;
-import com.bazinga.bazingaweather.util.JSONUtility;
+import com.bazinga.bazingaweather.sync.WeatherSyncUtils;
+import com.bazinga.bazingaweather.util.NotificationUtils;
 import com.bazinga.bazingaweather.util.ResourceHelper;
 import com.bazinga.bazingaweather.view.IShowWeatherVIew;
 import com.bumptech.glide.Glide;
@@ -80,6 +80,10 @@ public class WeatherActivity extends MVPBaseActivity<IShowWeatherVIew,HandleWeat
 
     private  String mWeatherId = "";
 
+    public static Boolean isFirstStartService = true;
+
+    public static String TAG = "WeatherActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -98,6 +102,12 @@ public class WeatherActivity extends MVPBaseActivity<IShowWeatherVIew,HandleWeat
         mPresenter.attach(this);
 
         doWeatherlogic();
+
+        if(isFirstStartService == true){
+            Log.i(TAG, "onCreate: "  + isFirstStartService);
+            isFirstStartService = false;
+            WeatherSyncUtils.scheduleJobWeatherSync(this);
+        }
 
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -121,6 +131,7 @@ public class WeatherActivity extends MVPBaseActivity<IShowWeatherVIew,HandleWeat
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
+
     }
 
     @Override
@@ -158,85 +169,6 @@ public class WeatherActivity extends MVPBaseActivity<IShowWeatherVIew,HandleWeat
     }
 
 
-//    @Override
-//    public void showWeatherData(Weather weather) {
-//        if(weather !=null){
-//
-//            String cityName = weather.basic.cityName;
-//
-//            String updateTime = weather.basic.update.updateTime;
-//
-//            String degree = weather.now.temperature + "℃";
-//
-//            String weatherInfo = weather.now.more.info;
-//
-//            titleCity.setText(cityName);
-//
-//            titleUpdateTime.setText(updateTime.split(" ")[1]);
-//
-//            degreeText.setText(degree);
-//
-//            weatherInfoText.setText(weatherInfo);
-//
-//            forecastLayout.removeAllViews();
-//
-//            int itemLayout = 0;
-//
-//            for (Forecast forecast : weather.forecastList) {
-//
-//                View view;
-//
-//                if(itemLayout != 0){
-//                    view = LayoutInflater.from(this).inflate(R.layout.forecast_item,
-//                            forecastLayout, false);
-//                }else{
-//                    itemLayout++;
-//                    view = LayoutInflater.from(this).inflate(R.layout.forecast_today_item,
-//                            forecastLayout, false);
-//                }
-//
-//                TextView dateText = (TextView) view.findViewById(R.id.date);
-//                TextView infoText = (TextView) view.findViewById(R.id.weather_description);
-//                TextView maxText = (TextView) view.findViewById(R.id.high_temperature);
-//                TextView minText = (TextView) view.findViewById(R.id.low_temperature);
-//                ImageView img = (ImageView) view.findViewById(R.id.weather_icon);
-//
-//                dateText.setText(forecast.date);
-//                infoText.setText(forecast.more.info);
-//                maxText.setText(forecast.temperature.max);
-//                minText.setText(forecast.temperature.min);
-//                img.setImageResource(ResourceHelper.getResourceId(forecast.more.code));
-//
-//                forecastLayout.addView(view);
-//            }
-//
-//            if(weather.aqi == null){
-//                aqiText.setText(getString(R.string.no_value));
-//                pm25Text.setText(getString(R.string.no_value));
-//            }else{
-//                aqiText.setText(weather.aqi.city.aqi);
-//                pm25Text.setText(weather.aqi.city.pm25);
-//            }
-//
-//            String comfort = getString(R.string.flag_comfortable)+ weather.suggestion.comfort.info;
-//
-//            String carWash = getString(R.string.flag_cleanCar) + weather.suggestion.carWash.info;
-//
-//            String sport = getString(R.string.flag_sport)+ weather.suggestion.sport.info;
-//
-//            comfortText.setText(comfort);
-//
-//            carWashText.setText(carWash);
-//
-//            sportText.setText(sport);
-//
-//            weatherLayout.setVisibility(View.VISIBLE);
-//
-//            Intent intent = new Intent(this, AutoUpdateService.class);
-//
-//            startService(intent);
-//        }
-//    }
 
     @Override
     public void showWeatherData(Map<String,Object> weather) {
@@ -312,9 +244,6 @@ public class WeatherActivity extends MVPBaseActivity<IShowWeatherVIew,HandleWeat
 
             weatherLayout.setVisibility(View.VISIBLE);
 
-            Intent intent = new Intent(this, AutoUpdateService.class);
-
-            startService(intent);
         }
     }
 

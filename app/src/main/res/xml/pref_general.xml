@@ -3,12 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<ListPreference-->
-        <!--android:defaultValue="@string/pref_units_metric"-->
-        <!--android:entries="@array/pref_units_options"-->
-        <!--android:entryValues="@array/pref_units_values"-->
-        <!--android:key="@string/pref_units_key"-->
-        <!--android:title="@string/pref_units_label" />-->
+    <CheckBoxPreference
+        android:defaultValue="@string/pref_switchNotification_default"
+        android:key="@string/pref_switchNotification"
+        android:summaryOff="@string/pref_switchNotification_false"
+        android:summaryOn="@string/pref_switchNotification_true"
+        android:title="@string/pref_switchNotification_Title"/>
+
 
     <ListPreference
         android:defaultValue="@string/pref_serviceUpdateTime_defalut"

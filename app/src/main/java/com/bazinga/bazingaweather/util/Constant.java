@@ -5,6 +5,7 @@ package com.bazinga.bazingaweather.util;
  */
 
 public class Constant {
+    public static final int DEFAULT_UPDATETIME = 8;
     public static String WEATHER_URL = "http://guolin.tech/api/weather?cityid=";
     public static String KEY = "&key=bc0418b57b2d4918819d3974ac1285d9";
     public static String PROVINCE_URL = "http://guolin.tech/api/china";

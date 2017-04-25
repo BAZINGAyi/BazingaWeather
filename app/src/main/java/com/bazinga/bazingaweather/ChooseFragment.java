@@ -4,12 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -21,7 +19,7 @@ import com.bazinga.bazingaweather.db.City;
 import com.bazinga.bazingaweather.db.County;
 import com.bazinga.bazingaweather.db.Province;
 import com.bazinga.bazingaweather.presenter.HandleQueryDataPresenter;
-
+import com.bazinga.bazingaweather.ui.SettingActivity;
 import com.bazinga.bazingaweather.view.IShowChooseVIew;
 
 import java.util.ArrayList;
@@ -29,15 +27,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 /**
  * Created by bazinga on 2017/4/1.
  */
 
-public class ChooseFragment extends MVpBaseFragment<IShowChooseVIew,HandleQueryDataPresenter> implements
+public class ChooseFragment extends MVpBaseFragment<IShowChooseVIew, HandleQueryDataPresenter> implements
         IShowChooseVIew {
 
     @BindView(R.id.back_button)
@@ -46,6 +41,8 @@ public class ChooseFragment extends MVpBaseFragment<IShowChooseVIew,HandleQueryD
     ListView listView;
     @BindView(R.id.title_text)
     TextView titleText;
+    @BindView(R.id.start_setting)
+    Button startSetting;
 
     private ArrayAdapter<String> adapter;
 
@@ -114,7 +111,7 @@ public class ChooseFragment extends MVpBaseFragment<IShowChooseVIew,HandleQueryD
 
                     selectedCity = cityList.get(position);
 
-                    mPresenter.queryCountys(selectedProvince.getProvinceCode(),selectedCity.getCityCode());
+                    mPresenter.queryCountys(selectedProvince.getProvinceCode(), selectedCity.getCityCode());
 
                 } else if (currentLevel == LEVEL_COUNTY) {
 
@@ -122,15 +119,15 @@ public class ChooseFragment extends MVpBaseFragment<IShowChooseVIew,HandleQueryD
 
                     if (getActivity() instanceof MainActivity) {
 
-                          Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                        Intent intent = new Intent(getActivity(), WeatherActivity.class);
 
-                          intent.putExtra(getString(R.string.weatherId), weatherId);
+                        intent.putExtra(getString(R.string.weatherId), weatherId);
 
-                          startActivity(intent);
+                        startActivity(intent);
 
-                          getActivity().finish();
+                        getActivity().finish();
 
-                    }else if(getActivity() instanceof  WeatherActivity){
+                    } else if (getActivity() instanceof WeatherActivity) {
 
                         WeatherActivity activity = (WeatherActivity) getActivity();
 
@@ -153,6 +150,14 @@ public class ChooseFragment extends MVpBaseFragment<IShowChooseVIew,HandleQueryD
 
                     mPresenter.getProvinceData();
                 }
+            }
+        });
+
+        startSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),SettingActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -209,17 +214,17 @@ public class ChooseFragment extends MVpBaseFragment<IShowChooseVIew,HandleQueryD
 
     @Override
     public void showProvinceError(String msg) {
-        Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showCityError(String msg) {
-        Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showCountyError(String msg) {
-        Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
     }
 
     @Override

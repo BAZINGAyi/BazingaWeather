@@ -22,19 +22,36 @@
     <string name="data_carWash">carWash</string>
     <string name="data_sport">sport</string>
     <string name="data_ForeastInfo">info</string>
-
+    <string name="data_Date">date</string>
 
 
     <!-- 定时服务相关 -->
-    <string name="pref_time_one" translatable="false">关</string>
+    <string name="pref_time_one" translatable="false">0</string>
     <string name="pref_time_two" translatable="false">4</string>
     <string name="pref_time_three" translatable="false">6</string>
     <string name="pref_time_four" translatable="false">8</string>
     <string name="pref_time_five" translatable="false">12</string>
     <string name="pref_serviceUpdateTime_defalut" translatable="false">8</string>
     <string name="pref_serviceUpdateTime_title" translatable="false">自动更新时间</string>
-    <string name="pref_serviceUpdateTime_key" translatable="false">℃</string>
-    <string name="data_Date">date</string>
+    <string name="pref_serviceUpdateTime_key" translatable="false">ServiceUpdateTime</string>
+
+    <string name="pref_label_time_one">关闭</string>
+    <string name="pref_label_time_two">4小时</string>
+    <string name="pref_label_time_three">6小时</string>
+    <string name="pref_label_time_four">8小时</string>
+    <string name="pref_label_time_five">12小时</string>
+    <string name="notificationTitle">Sunny Day :</string>
+
+
+    <!-- 是否开启通知相关 -->
+    <string name="pref_switchNotification">switchNotification</string>
+    <string name="pref_switchNotification_Title">通知</string>
+    <string name="pref_switchNotification_default">开</string>
+    <string name="pref_switchNotification_true">开</string>
+    <string name="pref_switchNotification_false">关</string>
+
+    <!-- 是否是第一次进入程序 -->
+
 
 
 </resources>

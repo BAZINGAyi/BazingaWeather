@@ -15,9 +15,5 @@
             <item>@string/pref_time_four</item>
             <item>@string/pref_time_five</item>
         </string-array>
-    <string name="pref_label_time_one">关</string>
-    <string name="pref_label_time_two">4</string>
-    <string name="pref_label_time_three">6</string>
-    <string name="pref_label_time_four">8</string>
-    <string name="pref_label_time_five">12</string>
+
 </resources>
