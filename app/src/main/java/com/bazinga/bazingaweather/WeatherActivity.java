@@ -212,11 +212,14 @@ public class WeatherActivity extends MVPBaseActivity<IShowWeatherVIew,HandleWeat
                 TextView minText = (TextView) view.findViewById(R.id.low_temperature);
                 ImageView img = (ImageView) view.findViewById(R.id.weather_icon);
 
+
                 dateText.setText(forecast.date);
                 infoText.setText(forecast.more.info);
                 maxText.setText(forecast.temperature.max);
                 minText.setText(forecast.temperature.min);
                 img.setImageResource(ResourceHelper.getResourceId(forecast.more.code));
+
+                maxText.invalidate(forecast.date);
 
                 forecastLayout.addView(view);
             }
